@@ -1,59 +1,153 @@
-# AngularGit
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+# AngularGit – JSONPlaceholder Post Manager
 
-## Development server
+This project is a complete solution for a **Technical Test: Angular + Git**, implemented using **Angular 19 with standalone components**.
 
-To start a local development server, run:
+It fulfills all the required functionalities from the test description, such as fetching, creating, editing, viewing, and deleting posts using the [JSONPlaceholder API](https://jsonplaceholder.typicode.com), with a professional project structure, strong TypeScript typing, and good Git practices.
+
+---
+
+## 🧪 Technical Test Overview
+
+**Duration:** 4 hours  
+**Topic:** Angular Technical Test – REST API consumption + Git
+
+**General Objective:**  
+Develop an Angular application that consumes the JSONPlaceholder public API, focused on post management. The test evaluates your Angular technical skills (components, services, forms, typing, HTTP consumption) as well as your Git usage and clean development practices.
+
+**API Used:**  
+https://jsonplaceholder.typicode.com  
+**Docs:** https://jsonplaceholder.typicode.com/guide  
+**UI Reference:** https://post-pal-admin-panel.lovable.app/
+
+---
+
+## ✅ Functional Requirements Implemented
+
+- [x] Post listing (limited to 10 posts, showing title, user name, and body)
+- [x] Post detail view
+- [x] Post creation form (with user selection and validations)
+- [x] Post editing (prefilled form with validations)
+- [x] Post deletion (with confirmation and simulated success)
+- [x] User name display instead of userId
+- [x] Reactive Forms with validations
+- [x] Fully typed TypeScript interfaces
+- [x] Clean architecture and Git commit history
+
+---
+
+## 🎁 Bonus Features Implemented
+
+- ✅ Toast notifications (success/error)
+- ✅ HttpInterceptor for centralized error handling
+- ✅ Lazy loaded routes (posts module)
+- ✅ Strict TypeScript typing
+- ✅ Feature folders and standalone components
+
+---
+
+## 🚀 Development Server
+
+To start the app locally:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open your browser at [http://localhost:4200](http://localhost:4200)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📦 Tech Stack
 
-```bash
-ng generate component component-name
-```
+- Angular 19 (standalone API)
+- RxJS
+- Angular Router
+- TypeScript (strict mode)
+- JSONPlaceholder API
+- HttpClient
+- Toasts via custom service
+- Interceptors
+- SCSS styling
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🏗️ Folder Structure
 
-## Building
+src/
+|
+├── app/
+│   ├── core/                 # Interfaces & models (Post, User, etc.)
+│   ├── shared/               # Reusable services (toast, interceptors)
+│   ├── features/
+│   │   ├── posts/            # Post listing, create, edit, view
+│   │   └── users/            # UsersService
+│   └── app.routes.ts         # Lazy-loaded routes
+|
+├── main.ts                   # Bootstrap entry
+├── app.config.ts             # Angular providers (http, interceptors)
+└── styles.scss               # Global styles
 
-To build the project run:
+---
+
+## 🧱 Building the App
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Artifacts are generated in the `/dist` folder.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## ✅ Running Unit Tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+Uses Karma test runner.
 
-For end-to-end (e2e) testing, run:
+---
+
+## 🔍 Running E2E Tests
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+> Note: You may need to configure your preferred e2e framework.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📚 Angular CLI Help
+
+To scaffold components or services:
+
+```bash
+ng generate component component-name
+ng generate service service-name
+```
+
+More options:
+
+```bash
+ng generate --help
+```
+
+---
+
+## 📌 Evaluation Criteria (All Met)
+
+- [x] Type-safe code in TypeScript
+- [x] Full CRUD using HttpClient (GET, POST, PUT, DELETE)
+- [x] Reactive Forms with validation
+- [x] Angular best practices (services, modular structure)
+- [x] Clean Git history with meaningful commits
+- [x] UX basics (validation errors, feedback)
+
+---
+
+## 📝 License
+
+This project is for technical evaluation, learning, and demonstration purposes.
