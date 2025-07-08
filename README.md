@@ -1,59 +1,56 @@
-# AngularGit
+# 📘 Angular Posts Manager – Technical Test
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+A single-page Angular 19+ application built to interact with the public [JSONPlaceholder](https://jsonplaceholder.typicode.com) API. It allows users to **list**, **view**, **create**, **edit**, and **delete** posts in a clean and reactive UI. The project emphasizes strict TypeScript typing, modular architecture, and UX best practices.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Features
+
+- ✅ Display a paginated list of posts (max 10 visible)
+- 👁️ View post details including author name
+- ➕ Create new posts via reactive form with validation
+- ✏️ Edit existing posts (preloaded form values)
+- 🗑️ Delete posts (with confirmation and simulated feedback)
+- 💬 Show author's name using `userId` relation
+- 🔥 Toast notifications on actions (success/error)
+- ⏳ Clean service layer and modular standalone components
+- 💡 Built using Angular 19 with strict typing, standalone components and modern patterns
+
+---
+
+## 📦 Installation
+
+Clone the repository and install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## 🧪 Running Locally
+
+Start the development server:
 
 ```bash
 ng serve
+# or
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open your browser and go to:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The app will reload automatically on code changes.
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🔎 Notes About the API
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+> ℹ️ The API used in this project is **mocked** and **does not persist data**.
+>
+> - Created, updated, or deleted posts will not be reflected after reload.
+> - However, HTTP responses are real — check the browser dev tools or network tab to verify successful operations.
