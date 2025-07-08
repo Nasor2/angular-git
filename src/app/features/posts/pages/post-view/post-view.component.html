@@ -1,1 +1,11 @@
-<p>post-view works!</p>
+<div class="container" *ngIf="post; else notFound">
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.body }}</p>
+  <p><strong>Usuario ID:</strong> {{ post.userId }}</p>
+  <button (click)="goBack()">Volver</button>
+</div>
+
+<ng-template #notFound>
+  <p>Cargando o publicación no encontrada...</p>
+  <button (click)="goBack()">Volver</button>
+</ng-template>

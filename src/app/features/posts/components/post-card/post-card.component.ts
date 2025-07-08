@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Post } from '../../../../core/interfaces/post.interface';
 
 @Component({
+  standalone: true,
   selector: 'app-post-card',
   imports: [CommonModule],
   templateUrl: './post-card.component.html',

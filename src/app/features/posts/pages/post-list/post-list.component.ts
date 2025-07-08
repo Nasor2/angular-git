@@ -3,8 +3,10 @@ import { PostsService } from '../../posts.service';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../../core/interfaces/post.interface';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
+import { Router } from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'app-post-list',
   imports: [CommonModule, PostCardComponent],
   templateUrl: './post-list.component.html',
@@ -12,19 +14,15 @@ import { PostCardComponent } from '../../components/post-card/post-card.componen
 })
 export class PostListComponent {
   posts: Post[] = [];
-  router: any;
 
-  constructor(private postsService: PostsService) {}
+  constructor(private router: Router, private postsService: PostsService) {}
 
   ngOnInit(): void {
-    this.loadPosts();
-  }
-
-  loadPosts(): void {
-    this.postsService.getPosts().subscribe((posts) => {
+    this.postsService.getPosts().subscribe(posts => {
       this.posts = posts;
     });
   }
+
   onView(id: number) {
     this.router.navigate(['view', id]);
   }
