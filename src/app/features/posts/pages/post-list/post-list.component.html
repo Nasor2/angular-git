@@ -35,4 +35,12 @@
     <p *ngIf="searchTerm">No hay resultados para "{{ searchTerm }}"</p>
     <p *ngIf="!searchTerm">Cargando publicaciones...</p>
   </ng-template>
+
+  <app-confirm-dialog
+    [visible]="isConfirmDialogVisible"
+    title="Eliminar publicación"
+    message="¿Seguro que quieres eliminar esta publicación?"
+    (confirm)="onConfirmDelete()"
+    (cancel)="onCancelDelete()"
+  />
 </div>

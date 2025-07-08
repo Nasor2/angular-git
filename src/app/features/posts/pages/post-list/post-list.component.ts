@@ -5,10 +5,11 @@ import { Post } from '../../../../core/interfaces/post.interface';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../../shared/services/toast.service';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 @Component({
   standalone: true,
   selector: 'app-post-list',
-  imports: [CommonModule, PostCardComponent],
+  imports: [CommonModule, PostCardComponent, ConfirmDialogComponent],
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss']
 })
@@ -17,7 +18,8 @@ export class PostListComponent {
   currentPage = 1;
   postsPerPage = 10;
   searchTerm = '';
-
+  selectedPostId: number | null = null;
+  isConfirmDialogVisible = false;
 
   constructor(
     private router: Router,
@@ -48,10 +50,10 @@ export class PostListComponent {
   }
 
   onSearchChange(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  this.searchTerm = input.value;
-  this.currentPage = 1;
-}
+    const input = event.target as HTMLInputElement;
+    this.searchTerm = input.value;
+    this.currentPage = 1;
+  }
 
   goToCreate(): void {
     this.router.navigate(['create']);
@@ -66,13 +68,26 @@ export class PostListComponent {
   }
 
   onDelete(id: number) {
-    if (confirm('¿Estás seguro de que deseas eliminar esta publicación?')) {
-      this.postsService.deletePost(id).subscribe({
+    this.selectedPostId = id;
+    this.isConfirmDialogVisible = true;
+  }
+  onCancelDelete(): void {
+    this.selectedPostId = null;
+    this.isConfirmDialogVisible = false;
+  }
+  onConfirmDelete(): void {
+    if (this.selectedPostId !== null) {
+      this.postsService.deletePost(this.selectedPostId).subscribe({
         next: () => {
-          this.posts = this.posts.filter(p => p.id !== id);
+          this.posts = this.posts.filter(p => p.id !== this.selectedPostId);
           this.toast.success('Publicación eliminada (simulado)');
+          this.selectedPostId = null;
+          this.isConfirmDialogVisible = false;
         },
-        error: () => this.toast.error('Error al eliminar publicación')
+        error: () => {
+          this.toast.error('Error al eliminar');
+          this.isConfirmDialogVisible = false;
+        }
       });
     }
   }
