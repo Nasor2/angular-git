@@ -5,7 +5,7 @@ export const routes: Routes = [
     {
     path: '',
     loadChildren: () =>
-      import('./features/posts/posts.routes.routing').then((m) => m.POST_MODULES),
+      import('./features/posts/posts.routes').then((m) => m.POST_ROUTES),
   },
   {
     path: '**',
