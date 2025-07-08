@@ -15,12 +15,15 @@ import { Router } from '@angular/router';
 export class PostListComponent {
   posts: Post[] = [];
 
-  constructor(private router: Router, private postsService: PostsService) {}
+  constructor(private router: Router, private postsService: PostsService) { }
 
   ngOnInit(): void {
     this.postsService.getPosts().subscribe(posts => {
       this.posts = posts;
     });
+  }
+  goToCreate(): void {
+    this.router.navigate(['create']);
   }
 
   onView(id: number) {

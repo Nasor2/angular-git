@@ -1,1 +1,32 @@
-<p>post-edit works!</p>
+<div class="container" *ngIf="form">
+  <h1>Editar publicación</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>
+      User ID:
+      <input type="number" formControlName="userId" />
+    </label>
+    <div *ngIf="form.get('userId')?.invalid && form.get('userId')?.touched">
+      Campo requerido y numérico.
+    </div>
+
+    <label>
+      Título:
+      <input type="text" formControlName="title" />
+    </label>
+    <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+      Requerido. Mínimo 3 caracteres.
+    </div>
+
+    <label>
+      Contenido:
+      <textarea formControlName="body"></textarea>
+    </label>
+    <div *ngIf="form.get('body')?.invalid && form.get('body')?.touched">
+      Requerido.
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Guardar cambios</button>
+    <button type="button" (click)="goBack()">Cancelar</button>
+  </form>
+</div>
