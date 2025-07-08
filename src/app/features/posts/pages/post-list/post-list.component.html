@@ -1,43 +1,89 @@
-<div class="container">
-  <h1>Publicaciones</h1>
+<div class="container py-5">
 
-  <div class="top-bar">
-    <button (click)="goToCreate()">+ Crear nueva publicación</button>
-    <input
-      type="text"
-      placeholder="Buscar por título..."
-      [value]="searchTerm"
-      (input)="onSearchChange($event)"
-    />
+  <!-- Header -->
+  <div class="mb-5">
+    <h1 class="display-5 fw-light text-dark mb-4">Publicaciones</h1>
+
+    <!-- Top Bar -->
+    <div class="row g-3 align-items-center">
+      <div class="col-md-6">
+        <button class="btn btn-dark rounded-pill px-4 fw-medium" (click)="goToCreate()">
+          + Crear nueva publicación
+        </button>
+      </div>
+      <div class="col-md-6">
+        <div class="position-relative">
+          <input
+            type="text"
+            class="form-control form-control-lg border-0 bg-light rounded-pill ps-4"
+            placeholder="Buscar por título..."
+            [value]="searchTerm"
+            (input)="onSearchChange($event)"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Posts Grid -->
   <ng-container *ngIf="paginatedPosts.length; else loading">
-    <app-post-card
-  *ngFor="let post of paginatedPosts"
-  [post]="post"
-  [userName]="getUserName(post.userId)"
-  (view)="onView(post.id)"
-  (edit)="onEdit(post.id)"
-  (remove)="onDelete(post.id)"
-></app-post-card>
+    <div class="row g-4 mb-5">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let post of paginatedPosts">
+        <app-post-card
+          [post]="post"
+          [userName]="getUserName(post.userId)"
+          (view)="onView(post.id)"
+          (edit)="onEdit(post.id)"
+          (remove)="onDelete(post.id)"
+        ></app-post-card>
+      </div>
+    </div>
 
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between align-items-center" *ngIf="totalPages > 1">
+      <button
+        class="btn btn-outline-dark rounded-pill px-4"
+        (click)="prevPage()"
+        [disabled]="currentPage === 1">
+        ← Anterior
+      </button>
+
+      <span class="text-muted fw-medium">
+        Página {{ currentPage }} de {{ totalPages }}
+      </span>
+
+      <button
+        class="btn btn-outline-dark rounded-pill px-4"
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages">
+        Siguiente →
+      </button>
+    </div>
   </ng-container>
 
-  <div class="pagination-controls" *ngIf="totalPages > 1">
-    <button (click)="prevPage()" [disabled]="currentPage === 1">
-      Anterior
-    </button>
-    <span>Página {{ currentPage }} de {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages">
-      Siguiente
-    </button>
-  </div>
-
+  <!-- Loading/Empty State -->
   <ng-template #loading>
-    <p *ngIf="searchTerm">No hay resultados para "{{ searchTerm }}"</p>
-    <p *ngIf="!searchTerm">Cargando publicaciones...</p>
+    <div class="text-center py-5">
+      <div *ngIf="searchTerm; else loadingContent" class="py-4">
+        <h4 class="text-muted mb-3">Sin resultados</h4>
+        <p class="text-secondary">
+          No hay publicaciones que coincidan con
+          <span class="fw-medium">"{{ searchTerm }}"</span>
+        </p>
+      </div>
+
+      <ng-template #loadingContent>
+        <div class="py-4">
+          <div class="spinner-border text-muted mb-3" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+          <p class="text-muted">Cargando publicaciones...</p>
+        </div>
+      </ng-template>
+    </div>
   </ng-template>
 
+  <!-- Confirm Dialog -->
   <app-confirm-dialog
     [visible]="isConfirmDialogVisible"
     title="Eliminar publicación"

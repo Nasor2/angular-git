@@ -1,2 +1,25 @@
-<app-toast></app-toast>
-<router-outlet></router-outlet>
+<main class="main">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.rtl.min.css" integrity="sha384-q8+l9TmX3RaSz3HKGBmqP2u5MkgeN7HrfOJBLcTgZsQsbrx8WqqxdA5PuwUV9WIx" crossorigin="anonymous"/>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+  <!-- Font Awesome para iconos -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+
+<header class="bg-white border-bottom py-4">
+  <div class="container">
+    <div class="text-center">
+      <h1 class="display-6 fw-light text-dark mb-2">Prueba Angular + Git</h1>
+      <p class="text-muted mb-0">Prueba Técnica Angular - Consumo de API REST + Git</p>
+    </div>
+  </div>
+</header>
+
+  <div class="content">
+    <app-toast />
+    <router-outlet />
+  </div>
+</main>

@@ -1,39 +1,78 @@
-<div class="container">
-  <h1>Crear nueva publicación</h1>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- Usuario (Select) -->
-    <label for="userId">Usuario</label>
-    <select id="userId" formControlName="userId">
-      <option value="">-- Selecciona un usuario --</option>
-      <option *ngFor="let user of users" [value]="user.id">
-        {{ user.name }}
-      </option>
-    </select>
-    <div *ngIf="form.get('userId')?.invalid && form.get('userId')?.touched">
-      <small>Selecciona un usuario</small>
+      <!-- Header -->
+      <div class="mb-5">
+        <h1 class="display-6 fw-light text-dark mb-2">Crear nueva publicación</h1>
+        <p class="text-muted">Comparte tu contenido con la comunidad</p>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <!-- Usuario -->
+        <div class="mb-4">
+          <label for="userId" class="form-label fw-medium text-dark">Usuario</label>
+          <select
+            id="userId"
+            formControlName="userId"
+            class="form-select form-select-lg border-0 bg-light">
+            <option value="">-- Selecciona un usuario --</option>
+            <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+          </select>
+          <div class="text-danger mt-2" *ngIf="form.get('userId')?.invalid && form.get('userId')?.touched">
+            <small>Selecciona un usuario</small>
+          </div>
+        </div>
+
+        <!-- Título -->
+        <div class="mb-4">
+          <label for="title" class="form-label fw-medium text-dark">Título</label>
+          <input
+            id="title"
+            type="text"
+            formControlName="title"
+            class="form-control form-control-lg border-0 bg-light"
+            placeholder="Ingresa un título llamativo"
+          />
+          <div class="text-danger mt-2" *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+            <small>Requerido. Mínimo 3 caracteres.</small>
+          </div>
+        </div>
+
+        <!-- Contenido -->
+        <div class="mb-5">
+          <label for="body" class="form-label fw-medium text-dark">Contenido</label>
+          <textarea
+            id="body"
+            formControlName="body"
+            class="form-control border-0 bg-light"
+            rows="8"
+            placeholder="Escribe el contenido de tu publicación..."
+          ></textarea>
+          <div class="text-danger mt-2" *ngIf="form.get('body')?.invalid && form.get('body')?.touched">
+            <small>El contenido es requerido</small>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-3">
+          <button
+            type="submit"
+            class="btn btn-dark rounded-pill px-4 fw-medium"
+            [disabled]="form.invalid">
+            Crear publicación
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-dark rounded-pill px-4"
+            (click)="goBack()">
+            Cancelar
+          </button>
+        </div>
+
+      </form>
     </div>
-
-    <!-- Título -->
-    <label>
-      Título:
-      <input type="text" formControlName="title" />
-    </label>
-    <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
-      Requerido. Mínimo 3 caracteres.
-    </div>
-
-    <!-- Contenido -->
-    <label>
-      Contenido:
-      <textarea formControlName="body"></textarea>
-    </label>
-    <div *ngIf="form.get('body')?.invalid && form.get('body')?.touched">
-      Requerido.
-    </div>
-
-    <!-- Botones -->
-    <button type="submit" [disabled]="form.invalid">Crear</button>
-    <button type="button" (click)="goBack()">Cancelar</button>
-  </form>
+  </div>
 </div>
