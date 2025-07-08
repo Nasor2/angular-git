@@ -1,11 +1,17 @@
-    <div class="container">
-      <h1>Publicaciones</h1>
-      <ul *ngIf="posts.length">
-        <li *ngFor="let post of posts.slice(0,10)">
-          <strong>{{ post.title }}</strong><br />
-          <small>Usuario ID: {{ post.userId }}</small>
-          <p>{{ post.body }}</p>
-        </li>
-      </ul>
-      <p *ngIf="!posts.length">Cargando publicaciones...</p>
-    </div>
+<div class="container">
+  <h1>Publicaciones</h1>
+
+  <ng-container *ngIf="posts.length; else loading">
+    <app-post-card
+      *ngFor="let post of posts.slice(0, 10)"
+      [post]="post"
+      (view)="onView($event)"
+      (edit)="onEdit($event)"
+      (remove)="onDelete($event)"
+    ></app-post-card>
+  </ng-container>
+
+  <ng-template #loading>
+    <p>Cargando publicaciones...</p>
+  </ng-template>
+</div>

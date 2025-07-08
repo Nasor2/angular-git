@@ -1,0 +1,11 @@
+<div class="card">
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.body }}</p>
+  <small>Usuario ID: {{ post.userId }}</small>
+
+  <div class="actions">
+    <button (click)="view.emit(post.id)">Ver</button>
+    <button (click)="edit.emit(post.id)">Editar</button>
+    <button (click)="remove.emit(post.id)">Eliminar</button>
+  </div>
+</div>
