@@ -13,4 +13,9 @@ export const POST_ROUTES: Routes = [
     path: 'edit/:id',
     loadComponent: () => import('./pages/post-edit/post-edit.component').then(m => m.PostEditComponent)
   },
+  {
+    path: 'create',
+    loadComponent: () =>
+      import('./pages/post-create/post-create.component').then(m => m.PostCreateComponent),
+  }
 ];
