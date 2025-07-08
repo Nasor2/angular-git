@@ -1,1 +1,11 @@
-<p>post-list works!</p>
+    <div class="container">
+      <h1>Publicaciones</h1>
+      <ul *ngIf="posts.length">
+        <li *ngFor="let post of posts.slice(0,10)">
+          <strong>{{ post.title }}</strong><br />
+          <small>Usuario ID: {{ post.userId }}</small>
+          <p>{{ post.body }}</p>
+        </li>
+      </ul>
+      <p *ngIf="!posts.length">Cargando publicaciones...</p>
+    </div>
