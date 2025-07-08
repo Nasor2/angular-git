@@ -1,33 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Post } from '../../core/interfaces/post.interface';
+import { Post, CreatePostRequest, UpdatePostRequest } from '../../core/interfaces/post.interface';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class PostsService {
-  private readonly API_URL = 'https://jsonplaceholder.typicode.com/posts';
-
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+  private readonly baseUrl = 'https://jsonplaceholder.typicode.com/posts';
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.API_URL);
+    return this.http.get<Post[]>(this.baseUrl);
   }
 
   getPostById(id: number): Observable<Post> {
-    return this.http.get<Post>(`${this.API_URL}/${id}`);
+    return this.http.get<Post>(`${this.baseUrl}/${id}`);
   }
 
-  createPost(post: Omit<Post, 'id'>): Observable<Post> {
-    return this.http.post<Post>(this.API_URL, post);
+  createPost(post: CreatePostRequest): Observable<Post> {
+    return this.http.post<Post>(this.baseUrl, post);
   }
 
-  updatePost(postId: number, post: Post): Observable<Post> {
-    return this.http.put<Post>(`${this.API_URL}/${post.id}`, post);
+  updatePost(id: number, post: UpdatePostRequest): Observable<Post> {
+    return this.http.put<Post>(`${this.baseUrl}/${id}`, post);
   }
 
-  deletePost(id: number): Observable<unknown> {
-    return this.http.delete(`${this.API_URL}/${id}`);
+  deletePost(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
