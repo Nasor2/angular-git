@@ -6,6 +6,10 @@ import { PostCardComponent } from '../../components/post-card/post-card.componen
 import { Router } from '@angular/router';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { UsersService } from '../../../users/user.service';
+import { User } from '../../../../core/interfaces/user.interface';
+
+
 @Component({
   standalone: true,
   selector: 'app-post-list',
@@ -15,6 +19,7 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
 })
 export class PostListComponent {
   posts: Post[] = [];
+  users: User[] = [];
   currentPage = 1;
   postsPerPage = 10;
   searchTerm = '';
@@ -24,6 +29,7 @@ export class PostListComponent {
   constructor(
     private router: Router,
     private postsService: PostsService,
+    private usersService: UsersService,
     private toast: ToastService
   ) { }
 
@@ -31,8 +37,14 @@ export class PostListComponent {
     this.postsService.getPosts().subscribe(posts => {
       this.posts = posts;
     });
+    this.usersService.getUsers().subscribe(users => {
+      this.users = users;
+    });
   }
 
+  getUserName(userId: number): string {
+    return this.users.find(u => u.id === userId)?.name || 'Usuario desconocido';
+  }
 
   get filteredPosts(): Post[] {
     return this.posts.filter(post =>

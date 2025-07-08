@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostsService } from '../../posts.service';
 import { switchMap, of } from 'rxjs';
 import { Post } from '../../../../core/interfaces/post.interface';
+import { User } from '../../../../core/interfaces/user.interface';
+import { UsersService } from '../../../users/user.service';
 import { ToastService } from '../../../../shared/services/toast.service';
+
 @Component({
   standalone: true,
   selector: 'app-post-edit',
@@ -13,19 +16,30 @@ import { ToastService } from '../../../../shared/services/toast.service';
   templateUrl: './post-edit.component.html',
   styleUrls: ['./post-edit.component.scss']
 })
-export class PostEditComponent {
+export class PostEditComponent implements OnInit {
   form!: FormGroup;
   postId!: number;
+  users: User[] = [];
 
   constructor(
     private fb: FormBuilder,
     private postsService: PostsService,
     private route: ActivatedRoute,
     private router: Router,
+    private usersService: UsersService,
     private toast: ToastService
   ) {}
 
   ngOnInit(): void {
+    // Cargar usuarios
+    this.usersService.getUsers().subscribe({
+      next: users => {
+        this.users = users;
+      },
+      error: () => this.toast.error('Error al cargar usuarios')
+    });
+
+    // Cargar post
     this.route.paramMap
       .pipe(
         switchMap(params => {

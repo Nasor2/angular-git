@@ -11,6 +11,7 @@ import { Post } from '../../../../core/interfaces/post.interface';
 })
 export class PostCardComponent {
   @Input() post!: Post;
+  @Input() userName = '';
   @Output() view = new EventEmitter<number>();
   @Output() edit = new EventEmitter<number>();
   @Output() remove = new EventEmitter<number>();

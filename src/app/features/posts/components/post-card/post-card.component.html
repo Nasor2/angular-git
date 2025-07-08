@@ -1,7 +1,8 @@
 <div class="card">
   <h2>{{ post.title }}</h2>
   <p>{{ post.body }}</p>
-  <small>Usuario ID: {{ post.userId }}</small>
+  <small>Publicado por: {{ userName }}</small>
+
 
   <div class="actions">
     <button (click)="view.emit(post.id)">Ver</button>

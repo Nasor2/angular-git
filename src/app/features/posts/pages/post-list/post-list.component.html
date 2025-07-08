@@ -13,12 +13,14 @@
 
   <ng-container *ngIf="paginatedPosts.length; else loading">
     <app-post-card
-      *ngFor="let post of paginatedPosts"
-      [post]="post"
-      (view)="onView(post.id)"
-      (edit)="onEdit(post.id)"
-      (remove)="onDelete(post.id)"
-    ></app-post-card>
+  *ngFor="let post of paginatedPosts"
+  [post]="post"
+  [userName]="getUserName(post.userId)"
+  (view)="onView(post.id)"
+  (edit)="onEdit(post.id)"
+  (remove)="onDelete(post.id)"
+></app-post-card>
+
   </ng-container>
 
   <div class="pagination-controls" *ngIf="totalPages > 1">

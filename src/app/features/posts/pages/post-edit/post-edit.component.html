@@ -2,31 +2,32 @@
   <h1>Editar publicación</h1>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <label>
-      User ID:
-      <input type="number" formControlName="userId" />
-    </label>
+    <!-- Usuario -->
+    <label for="userId">Usuario</label>
+    <select id="userId" formControlName="userId">
+      <option value="">-- Selecciona un usuario --</option>
+      <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+    </select>
     <div *ngIf="form.get('userId')?.invalid && form.get('userId')?.touched">
-      Campo requerido y numérico.
+      <small>Selecciona un usuario</small>
     </div>
 
-    <label>
-      Título:
-      <input type="text" formControlName="title" />
-    </label>
+    <!-- Título -->
+    <label for="title">Título</label>
+    <input id="title" type="text" formControlName="title" />
     <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
       Requerido. Mínimo 3 caracteres.
     </div>
 
-    <label>
-      Contenido:
-      <textarea formControlName="body"></textarea>
-    </label>
+    <!-- Contenido -->
+    <label for="body">Contenido</label>
+    <textarea id="body" formControlName="body"></textarea>
     <div *ngIf="form.get('body')?.invalid && form.get('body')?.touched">
       Requerido.
     </div>
 
-    <button type="submit" [disabled]="form.invalid">Guardar cambios</button>
+    <!-- Botones -->
+    <button type="submit" [disabled]="form.invalid">Actualizar</button>
     <button type="button" (click)="goBack()">Cancelar</button>
   </form>
 </div>
