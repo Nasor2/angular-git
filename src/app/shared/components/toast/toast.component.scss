@@ -1,40 +1,14 @@
-.toast-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
+/* src/app/components/toast/toast.component.scss */
+/* Opcional, animación */
 .toast {
-  padding: 10px 16px;
-  border-radius: 5px;
-  color: white;
-  font-weight: 500;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  animation: slideIn 0.3s ease-out;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.success {
-  background: #28a745;
-}
-
-.error {
-  background: #dc3545;
-}
-
-.info {
-  background: #17a2b8;
-}
-
-@keyframes slideIn {
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateX(50px);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);

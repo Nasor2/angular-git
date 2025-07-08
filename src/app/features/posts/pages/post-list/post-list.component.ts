@@ -40,6 +40,7 @@ export class PostListComponent {
     this.usersService.getUsers().subscribe(users => {
       this.users = users;
     });
+    
   }
 
   getUserName(userId: number): string {

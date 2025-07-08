@@ -1,10 +1,18 @@
-<div class="overlay" *ngIf="visible">
-  <div class="modal">
-    <h2>{{ title }}</h2>
-    <p>{{ message }}</p>
-    <div class="buttons">
-      <button class="cancel" (click)="cancel.emit()">Cancelar</button>
-      <button class="confirm" (click)="confirm.emit()">Confirmar</button>
+<div
+  *ngIf="visible"
+  style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+         background-color: rgba(0, 0, 0, 0.7); z-index: 99999;
+         display: flex; justify-content: center; align-items: center;">
+  <div style="background: white; padding: 2rem; border-radius: 10px; text-align: center; width: 90%; max-width: 400px;">
+    <h2 style="margin-bottom: 1rem;">{{ title }}</h2>
+    <p style="margin-bottom: 1.5rem;">{{ message }}</p>
+    <div style="display: flex; justify-content: space-between;">
+      <button (click)="cancel.emit()" style="padding: 0.5rem 1rem; background: #6c757d; color: white; border: none; border-radius: 5px;">
+        Cancelar
+      </button>
+      <button (click)="confirm.emit()" style="padding: 0.5rem 1rem; background: #dc3545; color: white; border: none; border-radius: 5px;">
+        Confirmar
+      </button>
     </div>
   </div>
 </div>

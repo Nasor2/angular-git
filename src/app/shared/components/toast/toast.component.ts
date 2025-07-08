@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { Toast, ToastService } from '../../services/toast.service';
 
 @Component({
@@ -10,13 +10,16 @@ import { Toast, ToastService } from '../../services/toast.service';
   styleUrls: ['./toast.component.scss']
 })
 export class ToastComponent {
-  toasts = signal<Toast[]>([]);
+  toasts: Toast[] = [];
+t: any;
 
   constructor(private toastService: ToastService) {
-    effect(() => {
-      this.toastService.toasts$.subscribe(toasts => {
-        this.toasts.set(toasts);
-      });
+    this.toastService.toasts$.subscribe(toasts => {
+      this.toasts = toasts;
     });
   }
+  removeToast(id: number) {
+  this.toasts = this.toasts.filter(t => t.id !== id);
+}
+
 }

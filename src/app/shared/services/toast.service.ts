@@ -1,3 +1,4 @@
+// src/app/services/toast.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -20,7 +21,6 @@ export class ToastService {
     const newToast: Toast = { id, message, type };
     this._toasts$.next([...this._toasts$.value, newToast]);
 
-    // auto-remover luego de 3 segundos
     setTimeout(() => {
       this._toasts$.next(this._toasts$.value.filter(t => t.id !== id));
     }, 3000);
