@@ -1,7 +1,15 @@
 <div class="container">
   <h1>Publicaciones</h1>
 
-  <button (click)="goToCreate()">+ Crear nueva publicación</button>
+  <div class="top-bar">
+    <button (click)="goToCreate()">+ Crear nueva publicación</button>
+    <input
+      type="text"
+      placeholder="Buscar por título..."
+      [value]="searchTerm"
+      (input)="onSearchChange($event)"
+    />
+  </div>
 
   <ng-container *ngIf="paginatedPosts.length; else loading">
     <app-post-card
@@ -13,13 +21,18 @@
     ></app-post-card>
   </ng-container>
 
-  <div class="pagination-controls">
-    <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+  <div class="pagination-controls" *ngIf="totalPages > 1">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">
+      Anterior
+    </button>
     <span>Página {{ currentPage }} de {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+      Siguiente
+    </button>
   </div>
 
   <ng-template #loading>
-    <p>Cargando publicaciones...</p>
+    <p *ngIf="searchTerm">No hay resultados para "{{ searchTerm }}"</p>
+    <p *ngIf="!searchTerm">Cargando publicaciones...</p>
   </ng-template>
 </div>

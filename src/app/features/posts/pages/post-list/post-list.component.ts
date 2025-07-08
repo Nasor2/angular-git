@@ -16,6 +16,8 @@ export class PostListComponent {
   posts: Post[] = [];
   currentPage = 1;
   postsPerPage = 10;
+  searchTerm = '';
+
 
   constructor(
     private router: Router,
@@ -29,14 +31,27 @@ export class PostListComponent {
     });
   }
 
+
+  get filteredPosts(): Post[] {
+    return this.posts.filter(post =>
+      post.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
   get paginatedPosts(): Post[] {
     const start = (this.currentPage - 1) * this.postsPerPage;
-    return this.posts.slice(start, start + this.postsPerPage);
+    return this.filteredPosts.slice(start, start + this.postsPerPage);
   }
 
   get totalPages(): number {
-    return Math.ceil(this.posts.length / this.postsPerPage);
+    return Math.ceil(this.filteredPosts.length / this.postsPerPage);
   }
+
+  onSearchChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  this.searchTerm = input.value;
+  this.currentPage = 1;
+}
 
   goToCreate(): void {
     this.router.navigate(['create']);
