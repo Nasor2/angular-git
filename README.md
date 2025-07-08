@@ -1,153 +1,56 @@
+# 📘 Angular Posts Manager – Technical Test
 
-# AngularGit – JSONPlaceholder Post Manager
-
-This project is a complete solution for a **Technical Test: Angular + Git**, implemented using **Angular 19 with standalone components**.
-
-It fulfills all the required functionalities from the test description, such as fetching, creating, editing, viewing, and deleting posts using the [JSONPlaceholder API](https://jsonplaceholder.typicode.com), with a professional project structure, strong TypeScript typing, and good Git practices.
+A single-page Angular 19+ application built to interact with the public [JSONPlaceholder](https://jsonplaceholder.typicode.com) API. It allows users to **list**, **view**, **create**, **edit**, and **delete** posts in a clean and reactive UI. The project emphasizes strict TypeScript typing, modular architecture, and UX best practices.
 
 ---
 
-## 🧪 Technical Test Overview
+## 🚀 Features
 
-**Duration:** 4 hours  
-**Topic:** Angular Technical Test – REST API consumption + Git
-
-**General Objective:**  
-Develop an Angular application that consumes the JSONPlaceholder public API, focused on post management. The test evaluates your Angular technical skills (components, services, forms, typing, HTTP consumption) as well as your Git usage and clean development practices.
-
-**API Used:**  
-https://jsonplaceholder.typicode.com  
-**Docs:** https://jsonplaceholder.typicode.com/guide  
-**UI Reference:** https://post-pal-admin-panel.lovable.app/
-
----
-
-## ✅ Functional Requirements Implemented
-
-- [x] Post listing (limited to 10 posts, showing title, user name, and body)
-- [x] Post detail view
-- [x] Post creation form (with user selection and validations)
-- [x] Post editing (prefilled form with validations)
-- [x] Post deletion (with confirmation and simulated success)
-- [x] User name display instead of userId
-- [x] Reactive Forms with validations
-- [x] Fully typed TypeScript interfaces
-- [x] Clean architecture and Git commit history
+- ✅ Display a paginated list of posts (max 10 visible)
+- 👁️ View post details including author name
+- ➕ Create new posts via reactive form with validation
+- ✏️ Edit existing posts (preloaded form values)
+- 🗑️ Delete posts (with confirmation and simulated feedback)
+- 💬 Show author's name using `userId` relation
+- 🔥 Toast notifications on actions (success/error)
+- ⏳ Clean service layer and modular standalone components
+- 💡 Built using Angular 19 with strict typing, standalone components and modern patterns
 
 ---
 
-## 🎁 Bonus Features Implemented
+## 📦 Installation
 
-- ✅ Toast notifications (success/error)
-- ✅ HttpInterceptor for centralized error handling
-- ✅ Lazy loaded routes (posts module)
-- ✅ Strict TypeScript typing
-- ✅ Feature folders and standalone components
+Clone the repository and install dependencies:
+
+```bash
+npm install
+```
 
 ---
 
-## 🚀 Development Server
+## 🧪 Running Locally
 
-To start the app locally:
+Start the development server:
 
 ```bash
 ng serve
+# or
+npm start
 ```
 
-Then open your browser at [http://localhost:4200](http://localhost:4200)
+Open your browser and go to:
 
----
-
-## 📦 Tech Stack
-
-- Angular 19 (standalone API)
-- RxJS
-- Angular Router
-- TypeScript (strict mode)
-- JSONPlaceholder API
-- HttpClient
-- Toasts via custom service
-- Interceptors
-- SCSS styling
-
----
-
-## 🏗️ Folder Structure
-
-src/
-|
-├── app/
-│   ├── core/                 # Interfaces & models (Post, User, etc.)
-│   ├── shared/               # Reusable services (toast, interceptors)
-│   ├── features/
-│   │   ├── posts/            # Post listing, create, edit, view
-│   │   └── users/            # UsersService
-│   └── app.routes.ts         # Lazy-loaded routes
-|
-├── main.ts                   # Bootstrap entry
-├── app.config.ts             # Angular providers (http, interceptors)
-└── styles.scss               # Global styles
-
----
-
-## 🧱 Building the App
-
-```bash
-ng build
+```
+http://localhost:4200
 ```
 
-Artifacts are generated in the `/dist` folder.
+The app will reload automatically on code changes.
 
 ---
 
-## ✅ Running Unit Tests
+## 🔎 Notes About the API
 
-```bash
-ng test
-```
-
-Uses Karma test runner.
-
----
-
-## 🔍 Running E2E Tests
-
-```bash
-ng e2e
-```
-
-> Note: You may need to configure your preferred e2e framework.
-
----
-
-## 📚 Angular CLI Help
-
-To scaffold components or services:
-
-```bash
-ng generate component component-name
-ng generate service service-name
-```
-
-More options:
-
-```bash
-ng generate --help
-```
-
----
-
-## 📌 Evaluation Criteria (All Met)
-
-- [x] Type-safe code in TypeScript
-- [x] Full CRUD using HttpClient (GET, POST, PUT, DELETE)
-- [x] Reactive Forms with validation
-- [x] Angular best practices (services, modular structure)
-- [x] Clean Git history with meaningful commits
-- [x] UX basics (validation errors, feedback)
-
----
-
-## 📝 License
-
-This project is for technical evaluation, learning, and demonstration purposes.
+> ℹ️ The API used in this project is **mocked** and **does not persist data**.
+>
+> - Created, updated, or deleted posts will not be reflected after reload.
+> - However, HTTP responses are real — check the browser dev tools or network tab to verify successful operations.
