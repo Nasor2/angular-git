@@ -14,6 +14,8 @@ import { ToastService } from '../../../../shared/services/toast.service';
 })
 export class PostListComponent {
   posts: Post[] = [];
+  currentPage = 1;
+  postsPerPage = 10;
 
   constructor(
     private router: Router,
@@ -26,6 +28,16 @@ export class PostListComponent {
       this.posts = posts;
     });
   }
+
+  get paginatedPosts(): Post[] {
+    const start = (this.currentPage - 1) * this.postsPerPage;
+    return this.posts.slice(start, start + this.postsPerPage);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.posts.length / this.postsPerPage);
+  }
+
   goToCreate(): void {
     this.router.navigate(['create']);
   }
@@ -40,13 +52,24 @@ export class PostListComponent {
 
   onDelete(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar esta publicación?')) {
-    this.postsService.deletePost(id).subscribe({
-      next: () => {
-        this.posts = this.posts.filter(p => p.id !== id);
-        this.toast.success('Publicación eliminada (simulado)');
-      },
-      error: () => this.toast.error('Error al eliminar publicación')
-    });
+      this.postsService.deletePost(id).subscribe({
+        next: () => {
+          this.posts = this.posts.filter(p => p.id !== id);
+          this.toast.success('Publicación eliminada (simulado)');
+        },
+        error: () => this.toast.error('Error al eliminar publicación')
+      });
+    }
   }
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
   }
 }

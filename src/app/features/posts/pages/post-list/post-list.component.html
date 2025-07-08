@@ -1,15 +1,23 @@
 <div class="container">
   <h1>Publicaciones</h1>
+
   <button (click)="goToCreate()">+ Crear nueva publicación</button>
-  <ng-container *ngIf="posts.length; else loading">
+
+  <ng-container *ngIf="paginatedPosts.length; else loading">
     <app-post-card
-      *ngFor="let post of posts.slice(0, 10)"
+      *ngFor="let post of paginatedPosts"
       [post]="post"
-      (view)="onView($event)"
-      (edit)="onEdit($event)"
-      (remove)="onDelete($event)"
+      (view)="onView(post.id)"
+      (edit)="onEdit(post.id)"
+      (remove)="onDelete(post.id)"
     ></app-post-card>
   </ng-container>
+
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+  </div>
 
   <ng-template #loading>
     <p>Cargando publicaciones...</p>
