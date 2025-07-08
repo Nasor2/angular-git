@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Post } from '../../../../core/interfaces/post.interface';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
 import { Router } from '@angular/router';
-
+import { ToastService } from '../../../../shared/services/toast.service';
 @Component({
   standalone: true,
   selector: 'app-post-list',
@@ -15,7 +15,11 @@ import { Router } from '@angular/router';
 export class PostListComponent {
   posts: Post[] = [];
 
-  constructor(private router: Router, private postsService: PostsService) { }
+  constructor(
+    private router: Router,
+    private postsService: PostsService,
+    private toast: ToastService
+  ) { }
 
   ngOnInit(): void {
     this.postsService.getPosts().subscribe(posts => {
@@ -36,10 +40,13 @@ export class PostListComponent {
 
   onDelete(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar esta publicación?')) {
-      this.postsService.deletePost(id).subscribe(() => {
+    this.postsService.deletePost(id).subscribe({
+      next: () => {
         this.posts = this.posts.filter(p => p.id !== id);
-        alert('Publicación eliminada (simulado)');
-      });
-    }
+        this.toast.success('Publicación eliminada (simulado)');
+      },
+      error: () => this.toast.error('Error al eliminar publicación')
+    });
+  }
   }
 }

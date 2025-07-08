@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostsService } from '../../posts.service';
 import { switchMap, of } from 'rxjs';
 import { Post } from '../../../../core/interfaces/post.interface';
-
+import { ToastService } from '../../../../shared/services/toast.service';
 @Component({
   standalone: true,
   selector: 'app-post-edit',
@@ -21,7 +21,8 @@ export class PostEditComponent {
     private fb: FormBuilder,
     private postsService: PostsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +45,7 @@ export class PostEditComponent {
           });
         },
         error: () => {
-          alert('Error al cargar publicación');
+          this.toast.error('Error al cargar publicación');
           this.router.navigate(['/']);
         }
       });
@@ -55,10 +56,10 @@ export class PostEditComponent {
       const updatedPost: Post = { id: this.postId, ...this.form.value };
       this.postsService.updatePost(this.postId, updatedPost).subscribe({
         next: () => {
-          alert('¡Publicación actualizada!');
+          this.toast.success('¡Publicación actualizada!');
           this.router.navigate(['/']);
         },
-        error: () => alert('Error al actualizar publicación')
+        error: () => this.toast.error('Error al actualizar publicación')
       });
     }
   }

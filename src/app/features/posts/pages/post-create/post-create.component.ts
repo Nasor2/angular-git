@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { PostsService } from '../../posts.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { ToastService } from '../../../../shared/services/toast.service';
 @Component({
   standalone: true,
   selector: 'app-post-create',
@@ -18,7 +18,8 @@ export class PostCreateComponent {
   constructor(
     private fb: FormBuilder,
     private postsService: PostsService,
-    private router: Router
+    private router: Router,
+    private toast: ToastService
   ) {
     this.form = this.fb.group({
       userId: [null, [Validators.required]],
@@ -31,10 +32,10 @@ export class PostCreateComponent {
     if (this.form.valid) {
       this.postsService.createPost(this.form.value).subscribe({
         next: () => {
-          alert('¡Publicación creada!');
+          this.toast.success('¡Publicación creada!');
           this.router.navigate(['/']);
         },
-        error: () => alert('Error al crear publicación')
+        error: () => this.toast.error('Error al crear publicación')
       });
     }
   }
